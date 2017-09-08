@@ -2,6 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import asyncValidate from './async-validate';
 
 import './index.css';
 
@@ -93,5 +94,6 @@ class ContactForm extends React.Component {
 // Decorate the form component.
 export default reduxForm({
     form: 'ContactForm',// a unique identifier for this form.
-    validate
+    validate,
+    asyncValidate
 })(ContactForm)
