@@ -42,8 +42,21 @@ const validate = values => {
 
 class Thankyou extends React.Component {
 
+    // For the 'valid' svg animation we need to delay the addition of the class 'show'.
+    state = {
+        show: false
+    }
+
+    // Here when the component is added to the DOM timeout a second and append the class 'show'
+    // for a smooth animation.
+    componentDidMount () {
+        this.timeoutId = setTimeout(function () {
+            this.setState({show: true});
+        }.bind(this), 1000);
+    }
+
     render = () => (
-        <div className="thankyou">
+        <div className={this.state.show ? 'thankyou show' : 'thankyou'}>
             <div className="thankyou-inner">
                 <svg version="1.1" id="tick" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 37 37">
                     <path className="svg-circ path" d="M30.5,6.5L30.5,6.5c6.6,6.6,6.6,17.4,0,24l0,0c-6.6,6.6-17.4,6.6-24,0l0,0c-6.6-6.6-6.6-17.4,0-24l0,0C13.1-0.2,23.9-0.2,30.5,6.5z"/>
@@ -110,7 +123,8 @@ class ContactForm extends React.Component {
                             <RaisedButton label="submit" onClick={this.props.handleSubmit(this.submit)} primary disabled={this.props.pristine || this.props.submitting}/>
                         </div>
                     </form>
-                    <Thankyou message={this.state.message}/>
+                    {/* Display thankyou message if the success state is true. */}
+                    {this.state.success ? <Thankyou message={this.state.message}/> : null}
                 </div>
             </div>
         )

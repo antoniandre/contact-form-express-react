@@ -9,7 +9,18 @@ form {
 }
 
 .thankyou {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    background-color: rgba(255,255,255,.9);
     text-align: center;
+    padding: 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 svg {
@@ -49,6 +60,10 @@ svg {
     transition: stroke-dashoffset 1s 0.5s ease-out;
 }
 .thankyou p {
+    opacity: 0;
     padding: 10px;
     color: #999;
+}
+.thankyou.show p {
+    opacity: 1;
 }
