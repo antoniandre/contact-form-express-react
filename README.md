@@ -31,7 +31,7 @@ with the command:
 
     $ PORT=3001 node bin/www
 
-Then the react application needs to be started (by default on port :3000) with the command:
+Then the react application needs to be started simultaneously (in another terminal window) by default on port :3000 with the command:
 
     $ cd client
     $ npm start
