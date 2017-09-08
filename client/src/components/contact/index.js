@@ -6,6 +6,24 @@ import RaisedButton from 'material-ui/RaisedButton';
 import './index.css';
 
 
+async function submitToServer(data) {
+    try {
+        let response = await fetch('/contact', {
+            method: 'post',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        let responseJson = await response.json();
+
+        return responseJson;
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+
 const validate = values => {
     const errors = {}
     const requiredFields = [ 'firstName', 'lastName', 'email', 'message' ]
@@ -25,6 +43,12 @@ const validate = values => {
 class ContactForm extends React.Component {
 
     submit = values => {
+        submitToServer(values).then(data => {
+            if (data.message !== undefined) {
+                this.setState({success: true, message: data.message});
+            }
+            console.log(data)
+        })
     }
 
     renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
